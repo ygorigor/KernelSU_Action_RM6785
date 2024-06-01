@@ -340,6 +340,26 @@ jobs:
         name: AnyKernel3${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/AnyKernel3/*
 
+    - name: Release
+      uses: softprops/action-gh-release@v2.0.5
+      with:
+          tag_name: ${{ env.KERNELSU_TAG }}
+          body: |
+            Device:
+            ${{ env.DEVICE }}
+
+            Kernel:
+            https://github.com/PixelOS-Devices/kernel_xiaomi_sm6150
+
+            AnyKernel3:
+            https://github.com/itsshashanksp/AnyKernel3
+
+            KernelSU:
+            https://github.com/tiann/KernelSU/releases/tag/${{ env.KERNELSU_TAG }}
+          files: |
+            AnyKernel3${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.zip
+          
+          
     - name: Upload DTBO image
       if: env.CHECK_DTBO_IS_OK == 'true'
       uses: actions/upload-artifact@v4
