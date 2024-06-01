@@ -312,7 +312,7 @@ jobs:
         fi
         rm -rf AnyKernel3/.git* AnyKernel3/README.md
         
-        cd kernel_workspace/AnyKernel3/
+        cd AnyKernel3/
         zip -r AnyKernel3${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }} *
 
     - name: Make boot image
