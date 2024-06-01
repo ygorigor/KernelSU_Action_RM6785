@@ -357,7 +357,7 @@ jobs:
             KernelSU:
             https://github.com/tiann/KernelSU/releases/tag/${{ env.KERNELSU_TAG }}
           files: |
-            AnyKernel3${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.zip
+            kernel_workspace/AnyKernel3/*
           
           
     - name: Upload DTBO image
