@@ -207,6 +207,7 @@ jobs:
         fi
         if [ ${{ env.NEED_DTBO }} = true ]; then
             grep -qxF "CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+            grep -qxF "CONFIG_BUILD_ARM64_DT_OVERLAY=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_BUILD_ARM64_DT_OVERLAY=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
             grep -qxF "CONFIG_IMG_GZ_DTB=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_IMG_GZ_DTB=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
             grep -qxF 'CONFIG_BUILD_ARM64_APPENDED_KERNEL_IMAGE_NAME="Image.gz"' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e 'CONFIG_BUILD_ARM64_APPENDED_KERNEL_IMAGE_NAME="Image.gz"' >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
             grep -qxF 'CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e 'CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
