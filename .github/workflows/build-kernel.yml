@@ -358,10 +358,10 @@ jobs:
             ${{ env.DEVICE }}
 
             Kernel:
-            env.KERNEL_SOURCE
+            ${{ env.KERNEL_SOURCE }}
 
             AnyKernel3:
-            env.CUSTOM_ANYKERNEL3_SOURCE
+            ${{ env.CUSTOM_ANYKERNEL3_SOURCE }}
 
             KernelSU:
             https://github.com/tiann/KernelSU/releases/tag/${{ env.KERNELSU_TAG }}
