@@ -205,6 +205,13 @@ jobs:
         if [ -e "arch/${{ env.ARCH }}/configs/vendor/sweet.config" ]; then
             cat arch/${{ env.ARCH }}/configs/vendor/sdmsteppe-perf_defconfig arch/${{ env.ARCH }}/configs/vendor/sweet.config > arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
         fi
+        if [ ${{ env.NEED_DTBO }} = true ]; then
+            grep -qxF "CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+            grep -qxF "CONFIG_IMG_GZ_DTB=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_IMG_GZ_DTB=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+            grep -qxF 'CONFIG_BUILD_ARM64_APPENDED_KERNEL_IMAGE_NAME="Image.gz"' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e 'CONFIG_BUILD_ARM64_APPENDED_KERNEL_IMAGE_NAME="Image.gz"' >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+            grep -qxF 'CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e 'CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES=""' >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+            grep -qxF "CONFIG_BUILD_ARM64_KERNEL_COMPRESSION_GZIP=y" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} || echo -e "CONFIG_BUILD_ARM64_KERNEL_COMPRESSION_GZIP=y" >> arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        fi
         if [ ${{ env.APPLY_KSU_PATCH }} = true ]; then
             bash $GITHUB_WORKSPACE/patches/patches.sh
             if grep -q "CONFIG_KSU" arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }}; then
